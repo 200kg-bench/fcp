@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>FCPPOCHENTONG</title>
+    <style>
+        * {
+            text-decoration: none;
+        }
+        body {
+            background: black !important;
+            color: white !important;
+        }
+        #nav-bar {
+            background-color: black !important;
+        }
+        .container h1 {
+            text-align: center;
+            font-size: 2rem;
+        }
+        ul {
+            text-align: center;
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            font-size: 1.2rem;
+        }
+        
+        /* Image Track Styling */
+        .image-track-container {
+            width: 100%;
+            overflow-x: auto; /* Allows scrolling on small screens */
+            white-space: nowrap;
+            padding: 1rem 0;
+        }
+        #image-track {
+            display: flex;
+            gap: 4vmin;
+            user-select: none;
+            padding-bottom: 1rem;
+            padding-left: 1rem;
+        }
+        #image-track .image {
+            width: 80%; /* Full width on mobile */
+            max-width: 300px; /* Limit image size */
+            height: auto;
+            object-fit: cover;
+            border: white solid 2px;
+            flex-shrink: 0;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            #image-track {
+                justify-content: start;
+                top: 0;
+                left: 0;
+                padding-left: 1rem;
+            }
+            .container h1 {
+                font-size: 1.5rem;
+            }
+            ul li {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="nav-bar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">FCP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="activities.html">Activities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Activities Section -->
+    <div class="container mt-4 text-center">
+        <h1>This is our church Activities</h1>
+        <h1>Year 2024</h1>
+        <ul>
+            <li>Langham</li>
+            <li>Veal Veng</li>
+        </ul>
+    </div>
+
+    <!-- Image Track Section -->
+    <div class="image-track-container">
+        <div id="image-track">
+            <img class="image" src="photo1.jpg" draggable="false" />
+            <img class="image" src="photo2.jpg" draggable="false" />
+            <img class="image" src="photo3.jpg" draggable="false" />
+            <img class="image" src="photo4.jpg" draggable="false" />
+            <img class="image" src="photo5.jpg" draggable="false" />
+            <img class="image" src="photo6.jpg" draggable="false" />
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <footer class="py-4 bg-dark text-white text-center">
+        <div class="container">
+            <h5>Contact Us</h5>
+            <p>Email: fcp@gmail.com | Phone: 092589018</p>
+            <p>Address: Oknha Try Heng St.(2011), Phnom Penh, Cambodia</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const track = document.getElementById("image-track");
+
+        let isDragging = false;
+        let startX, scrollLeft;
+
+        track.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            startX = e.pageX - track.offsetLeft;
+            scrollLeft = track.scrollLeft;
+        });
+
+        track.addEventListener("mouseleave", () => isDragging = false);
+        track.addEventListener("mouseup", () => isDragging = false);
+
+        track.addEventListener("mousemove", (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - track.offsetLeft;
+            const walk = (x - startX) * 2;
+            track.scrollLeft = scrollLeft - walk;
+        });
+
+        track.addEventListener("touchstart", (e) => {
+            isDragging = true;
+            startX = e.touches[0].pageX - track.offsetLeft;
+            scrollLeft = track.scrollLeft;
+        });
+
+        track.addEventListener("touchend", () => isDragging = false);
+        track.addEventListener("touchmove", (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].pageX - track.offsetLeft;
+            const walk = (x - startX) * 2;
+            track.scrollLeft = scrollLeft - walk;
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
